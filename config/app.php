@@ -177,7 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
-        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+
 
 
     ],
