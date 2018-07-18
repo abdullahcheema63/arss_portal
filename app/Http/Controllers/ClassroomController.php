@@ -46,10 +46,10 @@ class ClassroomController extends Controller
     public function store(Request $request)
     {
         //
-        $validatedData = $request->validate([
+        $this->validate($request,[
             'name' => 'required'
         ]);
-        Classroom::create($validatedData);
+        Classroom::create($request->all());
         return redirect()->route('classrooms.index')->with('success',"Classroom Created Successfully");
 
     }
@@ -87,10 +87,10 @@ class ClassroomController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validatedData = $request->validate([
+        $this->validate($request,[
             'name' => 'required'
         ]);
-        Classroom::find($id)->update($validatedData);
+        Classroom::find($id)->update($request->all());
         return redirect()->route('classrooms.index')->with('success',"Classroom Updated Successfully");
 
     }

@@ -120,6 +120,11 @@ return [
             'icon'=>'group'
         ],
         [
+            'text'=>'Attendance',
+            'route'=>'attendance.index',
+            'icon'=>'calendar'
+        ],
+        [
             'text'=>'SMS',
             'icon'=>'envelope',
             'submenu'=>[

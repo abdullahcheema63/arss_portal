@@ -41,14 +41,14 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
-        $validatedData = $request->validate([
+        $this->validate($request,[
             'name' => 'required',
             'father_name'=>'required',
             "address"=>'required',
             'phone_number'=>'required|digits_between:9,16',
             'classroom_id'=>'required'
         ]);
-        Student::create($validatedData);
+        Student::create($request->all());
         return redirect()->route('students.index')->with('success',"Student Created Successfully");
 
     }
