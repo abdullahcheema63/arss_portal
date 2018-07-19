@@ -57,7 +57,51 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user fa-inverse "></i>
+                                <span class="hidden-xs">{{Auth::user()->name}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <i class="fa fa-user fa-inverse fa-5x"></i>
+                                    <p>
+                                        {{Auth::user()->name}}
+                                        <small>{{Auth::user()->email}}</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                {{--<li class="user-body">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-xs-4 text-center">--}}
+                                            {{--<a href="#">Followers</a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-xs-4 text-center">--}}
+                                            {{--<a href="#">Sales</a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-xs-4 text-center">--}}
+                                            {{--<a href="#">Friends</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<!-- /.row -->--}}
+                                {{--</li>--}}
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" data-toggle="modal" data-target="#change_password_modal" class="btn btn-default btn-flat">Change Password</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-default btn-flat" href="#"
+                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                        >
+                                            <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li >
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
                                     <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
@@ -66,7 +110,7 @@
                                 <a href="#"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 >
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                    <i class="fa fa-fw fa-power-off"></i>
                                 </a>
                                 <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
                                     @if(config('adminlte.logout_method'))
@@ -147,6 +191,27 @@
 
     </div>
     <!-- ./wrapper -->
+
+    <div class="modal fade" id="change_password_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Default Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 @stop
 
 @section('adminlte_js')

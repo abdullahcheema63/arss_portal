@@ -135,9 +135,10 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">Import Students</h4>
+                        <h4 class="modal-title">Import Students using CSV</h4>
                     </div>
                     <div class="modal-body">
+                        <a href="{{url('files/students.csv')}}">Download Sample</a>
                         <form action="{{route('students.import')}}" class="dropzone" id="students-import-dropzone">
                             {{csrf_field()}}
                             <input type="hidden" name="classroom_id" id="import_classroom_id">

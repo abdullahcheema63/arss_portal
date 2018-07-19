@@ -45,8 +45,13 @@ class AttendanceController extends Controller
 
     public function store(Request $request){
         foreach ($request->students as $id){
-            if (array_search($id,$request->present) || array_search($id,$request->present)===0){
-                Attendance::create(['student_id'=>$id,'present'=>1]);
+            if ($request->present){
+                if (array_search($id,$request->present) || array_search($id,$request->present)===0){
+                    Attendance::create(['student_id'=>$id,'present'=>1]);
+                }
+                else{
+                    Attendance::create(['student_id'=>$id,'present'=>0]);
+                }
             }
             else{
                 Attendance::create(['student_id'=>$id,'present'=>0]);
@@ -57,22 +62,26 @@ class AttendanceController extends Controller
 
 
     public function update(Request $request){
-//        return $request->all();
-        foreach ($request->attendances as $id){
 
-            if (array_search($id,$request->present)){
-                Attendance::find($id)->update(['present'=>1]);
-            }
-            else{
-                if (array_search($id,$request->present)===0){
-                    Attendance::find($id)->update(['present'=>1]);
+            foreach ($request->attendances as $id){
+                if ($request->present) {
+                    if (array_search($id, $request->present)) {
+                        Attendance::find($id)->update(['present' => 1]);
+                    } else {
+                        if (array_search($id, $request->present) === 0) {
+                            Attendance::find($id)->update(['present' => 1]);
+                        } else {
+                            Attendance::find($id)->update(['present' => 0]);
+                        }
+
+                    }
                 }
                 else{
-                    Attendance::find($id)->update(['present'=>0]);
+                    Attendance::find($id)->update(['present' => 0]);
                 }
-
             }
-        }
+
+
         return redirect()->route('attendance.index')->with('success','attendance marked successfully');
     }
 
