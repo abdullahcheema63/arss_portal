@@ -66,12 +66,14 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <div class="pull-right">
-                        <strong>Absent Percentage:</strong>  <div class="pull-right">{{($tabsent/$ttotal)*100}}</div> <br>
-                        <strong>Total Absents:</strong>  <div class="pull-right">{{$tabsent}}</div>
-                        <br>
-                        <strong>Total Attendance:</strong> <div class="pull-right">{{$ttotal}}</div>
-                    </div>
+                    @if($ttotal!=0)
+                        <div class="pull-right">
+                            <strong>Absent Percentage:</strong>  <div class="pull-right">{{($tabsent/$ttotal)*100}}</div> <br>
+                            <strong>Total Absents:</strong>  <div class="pull-right">{{$tabsent}}</div>
+                            <br>
+                            <strong>Total Attendance:</strong> <div class="pull-right">{{$ttotal}}</div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

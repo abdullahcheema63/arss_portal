@@ -42,13 +42,15 @@
                             </table>
                         </div>
                         <div class="box-footer">
-                            <div class="row">
-                                <div class="pull-right">
-                                    <h4><strong>Total:</strong> <div class="pull-right"> {{$attendances->count()}}</div></h4>
-                                    <h4><strong>Present:</strong> <div class="pull-right"> {{$attendances->count()-$absent}}  ({{round((($attendances->count()-$absent)/$attendances->count())*100)}}%)</div></h4>
-                                    <h4><strong>Absent:</strong> <div class="pull-right"> {{$absent}}  ({{round(($absent/$attendances->count())*100,3)}}%)</div></h4>
+                            @if($attendances->count()>0)
+                                <div class="row">
+                                    <div class="pull-right">
+                                        <h4><strong>Total:</strong> <div class="pull-right"> {{$attendances->count()}}</div></h4>
+                                        <h4><strong>Present:</strong> <div class="pull-right"> {{$attendances->count()-$absent}}  ({{round((($attendances->count()-$absent)/$attendances->count())*100)}}%)</div></h4>
+                                        <h4><strong>Absent:</strong> <div class="pull-right"> {{$absent}}  ({{round(($absent/$attendances->count())*100,3)}}%)</div></h4>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="row no-print">
                                 <center>
                                     <input class="btn btn-primary" type="submit">
