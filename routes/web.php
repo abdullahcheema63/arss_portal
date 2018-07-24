@@ -56,4 +56,5 @@ Route::middleware("auth")->group(function (){
     Route::post('attendance','AttendanceController@store')->name('attendance.store');
     Route::put('attendance','AttendanceController@update')->name('attendance.update');
     Route::post('attendance/send-sms/{classroom_id?}','AttendanceController@sendSMS')->name('attendance.send-sms');
+    Route::get('attendance/history',"AttendanceController@viewOldAttendance")->name('attendance.history');
 });

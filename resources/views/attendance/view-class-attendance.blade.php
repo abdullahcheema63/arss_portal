@@ -5,7 +5,7 @@
 @section('content_header')
     <h1>View Attendance</h1>
 @stop
-
+@php($absent=0)
 @section('content')
     <div class="row">
         <div class="col-md-12 no-padding">
@@ -33,6 +33,7 @@
                                                 <input name="present[]" value="{{$attendance->id}}" type="checkbox" checked id="checkbox_{{$attendance->id}}">
                                             @else
                                                 <input name="present[]" value="{{$attendance->id}}" type="checkbox" id="checkbox_{{$attendance->id}}">
+                                                @php($absent++)
                                             @endif
                                         </td>
                                     </tr>
@@ -41,10 +42,19 @@
                             </table>
                         </div>
                         <div class="box-footer">
-                            <center>
-                                <input class="btn btn-primary" type="submit">
-                                <button type="button" class="btn btn-success" onclick="sendAbsentSMS(this)">Send SMS</button>
-                            </center>
+                            <div class="row">
+                                <div class="pull-right">
+                                    <h4><strong>Total:</strong> <div class="pull-right"> {{$attendances->count()}}</div></h4>
+                                    <h4><strong>Present:</strong> <div class="pull-right"> {{$attendances->count()-$absent}}  ({{round((($attendances->count()-$absent)/$attendances->count())*100)}}%)</div></h4>
+                                    <h4><strong>Absent:</strong> <div class="pull-right"> {{$absent}}  ({{round(($absent/$attendances->count())*100,3)}}%)</div></h4>
+                                </div>
+                            </div>
+                            <div class="row no-print">
+                                <center>
+                                    <input class="btn btn-primary" type="submit">
+                                    <button type="button" class="btn btn-success" onclick="sendAbsentSMS(this)">Send SMS</button>
+                                </center>
+                            </div>
                         </div>
                     </div>
 
@@ -57,6 +67,10 @@
     <script>
         function sendAbsentSMS(element) {
             var id=$(element).data('id');
+            var url="{{url('attendance/send-sms')}}"+"/"+"{{$classroom_id}}";
+            @if(!$classroom_id)
+                  url="{{url('attendance/send-sms')}}";
+            @endif
             swal({
                 title: "Are you sure?",
                 text: "Please make sure the attendance is correct!",
@@ -68,7 +82,7 @@
 
                     axios({
                         method:"POST",
-                        url:"{{url('attendance/send-sms')}}"+"/"+"{{$classroom_id}}",
+                        url:url,
                         data:{
                             _token:"{{csrf_token()}}"
                         }

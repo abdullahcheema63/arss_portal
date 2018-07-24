@@ -51,6 +51,33 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-">
+            <div class="box">
+                <div class="box-header">
+                    View Attendance By Month
+                </div>
+                <div class="box-body">
+                    <form method="get" action="{{route('attendance.history')}}">
+                        <div class="form-group">
+                            <label for="">Select Classroom:</label>
+                            <select name="classroom_id" id="view_attendance_classroom_id" class="form-control"    >
+                                <option selected disabled  value=null>All Classes</option>
+                                @foreach($classrooms as $classroom)
+                                    <option value="{{$classroom->id}}">{{$classroom->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="month">Month</label>
+                            <input type="month" class="form-control" name="month">
+                        </div>
+                        <input type="submit" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script>

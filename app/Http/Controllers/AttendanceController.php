@@ -99,4 +99,30 @@ class AttendanceController extends Controller
         }
         return "sms created successfully";
     }
+    public function viewOldAttendance(Request $request){
+//        return $request->all();
+        if (!$request->month){
+            return redirect()->route('attendance.index')->with('error','please select a month');
+        }
+        if (!$request->classroom_id){
+            $students=Student::all();
+        }
+        else {
+            $students=Classroom::find($request->classroom_id)->Students;
+        }
+        $month=Carbon::createFromFormat('Y-m',$request->month);
+
+        $attendances=Attendance::whereMonth('created_at',$month->month)->whereIn('student_id',$students->pluck('id'))->orderBy('created_at','ASC')->get();
+        $attendances=$attendances->groupBy(function ($element){
+            return Carbon::parse($element->created_at)->format('d');
+        });
+        $dates=array_keys($attendances->toArray());
+        foreach ($attendances as $key=>$attendance){
+            $attendances[$key]=$attendance->groupBy(function ($element){
+               return $element->student_id;
+            });
+        }
+        return view('attendance.view-old-attendance',compact('attendances','dates','students'));
+    }
 }
+
