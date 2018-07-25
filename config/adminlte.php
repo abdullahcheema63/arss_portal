@@ -138,6 +138,20 @@ return [
                 ]
             ]
 
+        ],
+        [
+            'text'=>'Settings',
+            'icon'=>'gear',
+            'submenu'=>[
+                [
+                    'text'=>'Semester',
+
+                ],
+                [
+                    'text'=>'Academic Year',
+                    'route'=>'year.index'
+                ]
+            ]
         ]
 //        [
 //            'text' => 'Blog',

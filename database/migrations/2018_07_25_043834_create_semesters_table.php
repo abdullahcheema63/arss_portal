@@ -15,6 +15,7 @@ class CreateSemestersTable extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->date('start_at');
             $table->date('end_date');
             $table->unsignedInteger('academic_year_id');
